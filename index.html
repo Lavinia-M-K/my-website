@@ -55,7 +55,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   position:fixed; inset:0; z-index:55; pointer-events:none;
   background:radial-gradient(125% 95% at 50% 42%, transparent 40%, rgba(2,4,6,.55) 100%);
 }
-.page{ position:relative; z-index:10; }
+.page{ position:relative; z-index:10; isolation:isolate; }
 
 /* ============================================================= type */
 .eyebrow{
@@ -663,26 +663,33 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
    scene. JS drives opacity and scale from virtualCameraZ; this sheet only
    stacks, anchors, and hides the leftover temple stubs. */
 #fg-sky{
-  position:fixed; inset:0; z-index:1; pointer-events:none;
-  overflow:hidden;
+  position:fixed; inset:0; width:100%; height:100%;
+  z-index:1; pointer-events:none;
+  overflow:hidden; isolation:isolate; contain:paint;
+  transform:translate3d(0,0,0);
+  clip-path:inset(0);
 }
 .fg{
-  position:absolute; inset:0; z-index:0;
-  overflow:hidden; pointer-events:none;
+  position:absolute; inset:0; width:100%; height:100%;
+  z-index:0; overflow:visible; pointer-events:none;
 }
 .hero > *:not(.fg), .sec > *:not(.fg), .foot > *:not(.fg){ position:relative; z-index:2; }
 .fg-el:not([data-depth]){ display:none !important; }
 .fg-el[data-depth]{
-  position:absolute; inset:0;
+  position:absolute !important; inset:0 !important;
+  top:0 !important; right:0 !important; bottom:0 !important; left:0 !important;
+  width:100% !important; height:100% !important;
+  max-width:none !important;
+  overflow:hidden;
   opacity:0; visibility:hidden;
   transform-origin:50% 50%;
-  will-change:transform, opacity;
   pointer-events:none;
   transition:none !important;
 }
 .fg-el[data-depth] > img{
-  position:absolute; inset:0;
-  width:100%; height:100%; max-width:none; max-height:none;
+  position:absolute !important; inset:0 !important;
+  width:100% !important; height:100% !important;
+  max-width:none !important; max-height:none !important;
   object-fit:cover; object-position:center;
   opacity:1;
   filter:saturate(.94) brightness(.97);
@@ -810,10 +817,10 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 <!-- ============================================================ hero -->
 <section class="hero" id="hero" data-cam="0">
   <div class="fg" data-fg="hero" aria-hidden="true">
-    <span class="fg-el fg-deep" data-depth="8.0" style="position:absolute; bottom:0; right:0;">
+    <span class="fg-el fg-deep" data-depth="8.0">
       <img src="secret-pathways-assets/generated/01-dust-mid.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </span>
-    <span class="fg-el fg-close" data-depth="5.0" style="position:absolute; bottom:0; right:0;">
+    <span class="fg-el fg-close" data-depth="5.0">
       <img src="secret-pathways-assets/generated/01-cell-fg.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </span>
   </div>
@@ -856,10 +863,10 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 <!-- ============================================================ chapter I -->
 <section class="sec" id="gate" data-cam="1">
   <div class="fg" data-fg="gate" aria-hidden="true">
-    <span class="fg-el fg-deep" data-depth="2.5" style="position:absolute; bottom:0; right:0;">
+    <span class="fg-el fg-deep" data-depth="2.5">
       <img src="secret-pathways-assets/generated/02-microscope-mid.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </span>
-    <span class="fg-el fg-close" data-depth="2.0" style="position:absolute; bottom:0; right:0;">
+    <span class="fg-el fg-close" data-depth="2.0">
       <img src="secret-pathways-assets/generated/02-scientist-fg.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </span>
     <!-- preserved transparent stubs for later swap-in -->
@@ -917,10 +924,10 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 <!-- ============================================================ chapter II -->
 <section class="sec" id="pathways" data-cam="2">
   <div class="fg" data-fg="pathways" aria-hidden="true">
-    <span class="fg-el fg-deep" data-depth="3.0" style="position:absolute; bottom:0; right:0;">
+    <span class="fg-el fg-deep" data-depth="3.0">
       <img src="secret-pathways-assets/generated/03-camera-mid.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </span>
-    <span class="fg-el fg-close" data-depth="1.0" style="position:absolute; bottom:0; right:0;">
+    <span class="fg-el fg-close" data-depth="1.0">
       <img src="secret-pathways-assets/generated/03-camera-fg.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </span>
     <!-- preserved transparent stubs for later swap-in -->
@@ -947,10 +954,10 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 <!-- ============================================================ chapter III -->
 <section class="sec" id="lessons" data-cam="3">
   <div class="fg" data-fg="lessons" aria-hidden="true">
-    <span class="fg-el fg-deep" data-depth="3.0" style="position:absolute; bottom:0; right:0;">
+    <span class="fg-el fg-deep" data-depth="3.0">
       <img src="secret-pathways-assets/generated/04-monitor-mid.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </span>
-    <span class="fg-el fg-close" data-depth="2.0" style="position:absolute; bottom:0; right:0;">
+    <span class="fg-el fg-close" data-depth="2.0">
       <img src="secret-pathways-assets/generated/04-editor-fg.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </span>
     <!-- preserved transparent stubs for later swap-in -->
@@ -984,7 +991,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 <!-- ============================================================ chapter IV -->
 <section class="sec fin" id="eternity" data-cam="4">
   <div class="fg" data-fg="eternity" aria-hidden="true">
-    <span class="fg-el fg-deep" data-depth="5.0" style="position:absolute; inset:0;">
+    <span class="fg-el fg-deep" data-depth="5.0">
       <img src="secret-pathways-assets/generated/05-collage-mid.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </span>
     <!-- preserved transparent stubs for later swap-in -->
@@ -1027,7 +1034,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 <footer class="foot" data-cam="5">
   <!-- foreground: placeholders (swap transparent stubs for art later) -->
   <div class="fg" data-fg="foot" aria-hidden="true">
-    <span class="fg-el fg-close" data-depth="1.0" style="position:absolute; inset:0;">
+    <span class="fg-el fg-close" data-depth="1.0">
       <img src="secret-pathways-assets/generated/05-flare-mid.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </span>
     <span class="fg-el fg-bush" data-fg-in="up">
@@ -1288,9 +1295,21 @@ const hdr = (r, g, b) => new THREE.Color().setRGB(r, g, b);
 
 const WORLD = {};
 const WORD = { reveal: 0 };
-const RIG = { prog: 0, smooth: 0, mx: 0, my: 0, tmx: 0, tmy: 0, intro: 0, focus: -1, focusAmt: 0 };
+const RIG = { prog: 0, smooth: 0, z: 0, mx: 0, my: 0, tmx: 0, tmy: 0, intro: 0, focus: -1, focusAmt: 0 };
 const Z_GAP = 24;
 let virtualCameraZ = 0;
+/* One shared Z tunnel. Incoming plates still land at chapter entry.
+   Outgoing plates recede linearly (no fade) and stay in the distance.
+   Fade-in uses the same linear duration as the recede, and starts a
+   beat earlier so the new scene is already present as the old one
+   finishes pulling back. */
+const Z_BURST = 0.24;
+const Z_SPAN = 0.26;
+const Z_OUT_START = 0.46;
+const Z_OUT_END = 0.70;
+const Z_IN_DELAY = 0.08;
+const Z_FLY_OUT = 0.24;
+const Z_FLY_IN = 2.45;
 
 const _fogA = new THREE.Color(), _fogB = new THREE.Color(), _fogT = new THREE.Color();
 const CH_ATMO = [
@@ -1528,6 +1547,7 @@ function wireZLayers() {
     const sec = stage.closest('[data-cam]');
     const cam = sec ? +sec.dataset.cam : 0;
     if (sky && stage.parentNode !== sky) sky.appendChild(stage);
+    stage.style.zIndex = String(cam);
     stage.querySelectorAll('.fg-el[data-depth]').forEach(el => {
       const img = el.querySelector('img');
       if (img) img.loading = 'eager';
@@ -1537,38 +1557,77 @@ function wireZLayers() {
         home: cam,
         depth: isFinite(depth) ? Math.max(0.6, depth) : 2
       });
+      el.removeAttribute('style');
     });
   });
 }
 
+function zOnScale(local, depth) {
+  const rest = 1 + 0.55 / depth;
+  const recede = Math.max(0, local) * (0.95 / depth);
+  return clamp(rest - recede, 1, 2.85);
+}
+
+function zWindows(home) {
+  const last = SECS.length - 1;
+  const terminal = home === last;
+  return {
+    on0: home,
+    on1: terminal ? 99 : home + Z_OUT_START,
+    out0: terminal ? -9 : home + Z_OUT_START,
+    out1: terminal ? -9 : home + Z_OUT_END,
+    in0: home === 0 ? -9 : home - Z_SPAN,
+    in1: home
+  };
+}
+
 function applyZLayers() {
-  const p = RIG.smooth;
+  const p = RIG.z;
+  const last = SECS.length - 1;
   const swayX = Math.sin(clock * 0.13) * 8;
   const swayY = Math.cos(clock * 0.10) * 5;
   ZLAYERS.forEach((L, i) => {
-    const t = p - L.home;
-    const fadeIn  = smooth(-0.62, -0.10, t);
-    const fadeOut = 1 - smooth(0.36, 0.98, t);
-    const op = fadeIn * fadeOut;
+    const W = zWindows(L.home);
+    let scale = 1, op = 0, phase = 'off';
+
+    if (p >= W.in0 && p < W.in1) {
+      phase = 'in';
+      const u = sat((p - W.in0) / Math.max(1e-4, W.in1 - W.in0));
+      const s1 = zOnScale(0, L.depth);
+      const w = sat((u - Z_IN_DELAY) / (1 - Z_IN_DELAY));
+      const k = 1 - Math.pow(1 - w, 2.6);
+      scale = lerp(Z_FLY_IN, s1, k);
+      op = sat((p - (W.in1 - Z_SPAN)) / Z_BURST);
+    } else if (p >= W.on0 && p <= W.on1) {
+      phase = 'on';
+      scale = zOnScale(p - W.on0, L.depth);
+      op = 1;
+    } else if (p >= W.out0 && p <= W.out1) {
+      phase = 'out';
+      const u = sat((p - W.out0) / Math.max(1e-4, W.out1 - W.out0));
+      const s0 = zOnScale(W.on1 - W.on0, L.depth);
+      scale = lerp(s0, Z_FLY_OUT, u);
+      op = 1;
+    } else if (L.home < last && p > W.out1) {
+      phase = 'past';
+      const u = p - W.out1;
+      scale = Z_FLY_OUT / (1 + u * 0.55);
+      op = scale < 0.028 || (p - L.home) > 2.4 ? 0 : 1;
+    }
+
     if (op < 0.012) {
       L.el.style.opacity = '0';
       L.el.style.visibility = 'hidden';
+      L.el.style.transform = 'none';
       return;
     }
-    /* Cover-fit rest. Closer plates (small depth) start more zoomed-in
-       and recede faster — always scale >= 1 so object-fit:cover never
-       shows a letterbox. Incoming chapters arrive oversized. */
-    const rest = 1 + 0.55 / L.depth;
-    const arrive = Math.max(0, -t) * (1.55 / L.depth);
-    const recede = Math.max(0,  t) * (0.95 / L.depth);
-    const scale = clamp(rest + arrive - recede, 1, 2.85);
-    const par = 0.72 / L.depth;
+    const par = (phase === 'on' ? 0.72 : 0.18) / L.depth;
     const tx = RIG.mx * 28 * par + swayX * par;
     const ty = -RIG.my * 16 * par + swayY * par;
     L.el.style.visibility = 'visible';
     L.el.style.opacity = op.toFixed(3);
     L.el.style.transform = 'translate3d(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px,0) scale(' + scale.toFixed(4) + ')';
-    L.el.style.zIndex = String(800 - Math.round(L.depth * 30) - Math.round(Math.max(0, t) * 40) - i);
+    L.el.style.zIndex = String(Math.round((8 - L.depth) * 2) - i);
   });
 }
 
@@ -2356,12 +2415,14 @@ const SECS = [].slice.call(document.querySelectorAll('[data-cam]'));
 let anchors = [], maxScroll = 1, activeSec = 0;
 function measure() {
   maxScroll = Math.max(1, document.documentElement.scrollHeight - vpH());
+  /* Integer progress = chapter entry (section top near the upper frame),
+     not the section midpoint — so a between-burst finishes as the new
+     chapter's type arrives, not halfway through it. */
   anchors = SECS.map((el, i) => {
     if (i === 0) return 0;
-    if (i === SECS.length - 1) return maxScroll;
-    return clamp(el.offsetTop + el.offsetHeight * .5 - vpH() * .5, 0, maxScroll);
+    return clamp(el.offsetTop - vpH() * 0.16, 0, maxScroll);
   });
-  for (let i = 1; i < anchors.length; i++) anchors[i] = Math.max(anchors[i], anchors[i - 1] + 1);
+  for (let i = 1; i < anchors.length; i++) anchors[i] = Math.max(anchors[i], anchors[i - 1] + 80);
 }
 function progressFor(y) {
   if (y <= anchors[0]) return 0;
@@ -2793,6 +2854,7 @@ function frame(now) {
   }
   RIG.prog = progressFor(scrollY);
   RIG.smooth = damp(RIG.smooth, RIG.prog, 5.2, dt);
+  RIG.z = damp(RIG.z, RIG.prog, 14, dt);
   RIG.mx = damp(RIG.mx, RIG.tmx, 2.6, dt);
   RIG.my = damp(RIG.my, RIG.tmy, 2.6, dt);
   if (INTRO.t0) {
@@ -2858,6 +2920,7 @@ function fallback(err) {
     tPrev = now; clock += dt;
     RIG.prog = progressFor(scrollY);
     RIG.smooth = damp(RIG.smooth, RIG.prog, 5.2, dt);
+    RIG.z = damp(RIG.z, RIG.prog, 14, dt);
     virtualCameraZ = RIG.smooth * Z_GAP;
     applyZLayers();
     requestAnimationFrame(tickFG);
@@ -2879,7 +2942,7 @@ function start() {
     RIG.intro = 1; WORD.reveal = 1.2; fadeIn = 1; INTRO.t0 = 0;
     const n = clamp(parseInt(shot, 10) || 0, 0, SECS.length - 1);
     scrollTo(0, anchors[n]);
-    RIG.smooth = RIG.prog = progressFor(anchors[n]);
+    RIG.smooth = RIG.z = RIG.prog = progressFor(anchors[n]);
     $$('[data-rv], .mask-line').forEach(e => e.classList.add('rv-in'));
     document.body.classList.remove('is-locked');
     preEl.classList.add('done');
