@@ -165,11 +165,19 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .hero{ position:relative; min-height:100svh; padding:0 var(--pad); display:flex; flex-direction:column; }
 .hero::before{ content:''; position:absolute; left:0; right:0; top:0; height:46%; z-index:1; pointer-events:none;
   background:linear-gradient(rgba(3,6,9,.72), rgba(3,6,9,.34) 46%, transparent); }
-.hero-top{ padding-top:calc(var(--nav-h) + clamp(12px,2.6vh,34px)); max-width:min(560px,46vw); position:relative; z-index:2; }
+.hero-top{ padding-top:0; max-width:min(560px,46vw); position:relative; z-index:2; }
 .hero-top .eyebrow{ display:flex; align-items:center; gap:10px; margin-bottom:20px; }
 .hero-top .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background:var(--vermilion); box-shadow:0 0 10px var(--vermilion); }
+.hero > .sec-head{
+  position:relative; z-index:2;
+  margin-top:calc(var(--nav-h) + clamp(12px,2.6vh,34px));
+  margin-bottom:clamp(18px,2.4vh,28px);
+}
 .hero h1{ margin-bottom:18px; }
-.hero-sub{ max-width:322px; text-shadow:0 1px 26px rgba(3,6,8,.95); }
+.hero-kicker{ margin:0 0 16px; max-width:46ch; }
+.hero-sub{ max-width:46ch; text-shadow:0 1px 26px rgba(3,6,8,.95); }
+.cta-stack{ display:flex; flex-direction:column; align-items:flex-start; gap:12px; margin-top:44px; }
+.cta-stack .cta{ margin-top:0; }
 .hero-spacer{ flex:1 1 auto; min-height:clamp(140px,26vh,300px); }
 .hero-foot{ padding-bottom:clamp(22px,4.2vh,42px); position:relative; z-index:2; }
 .hero-cue{ display:flex; align-items:center; justify-content:flex-end; gap:12px; margin-bottom:14px;
@@ -251,10 +259,12 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 
 /* — chapter I: the gate */
 .gate-grid{ display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,1fr); gap:clamp(28px,5vw,90px); align-items:start; }
-.gate-grid h2{ max-width:11ch; }
+.gate-grid h2{ max-width:18ch; }
 .gate-copy{ padding-top:6px; }
 .gate-copy .lead{ font-size:clamp(15px,1.16vw,19px); line-height:1.66; color:#c2cdc5; text-shadow:0 1px 20px rgba(3,6,8,.9); }
-.gate-copy .lead + p{ margin-top:20px; }
+.gate-copy .lead + p, .gate-copy p + p{ margin-top:20px; }
+.case-fact{ margin:18px 0 0; font-size:13px; line-height:1.65; color:#9aa5a0; text-shadow:0 1px 16px rgba(3,6,8,.92); }
+.case-fact b{ display:block; font-size:10px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--bone-dim); margin-bottom:6px; }
 .arrowlink{ display:inline-flex; align-items:center; gap:12px; margin-top:34px;
   font-size:11px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--bone); }
 .arrowlink .ar{ width:34px; height:34px; border:1px solid var(--line); border-radius:50%;
@@ -390,10 +400,11 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 /* — chapter III: curriculum */
 .cur-head{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.72fr); gap:clamp(28px,5vw,90px); align-items:end; margin-bottom:clamp(34px,6vh,72px); }
 .cur-head h2{ max-width:13ch; }
+.cur-copy .body-lg + .body-lg{ margin-top:16px; }
 .cur{ border-top:1px solid var(--line-soft); }
 .les{
   position:relative; display:grid; align-items:center;
-  grid-template-columns:64px minmax(0,1.05fr) minmax(0,1.25fr) 86px;
+  grid-template-columns:64px minmax(0,.95fr) minmax(0,1.3fr) minmax(132px,.75fr);
   gap:clamp(14px,2.4vw,40px);
   padding:clamp(20px,2.4vw,30px) 0; border-bottom:1px solid var(--line-soft);
   cursor:pointer; transition:padding .5s var(--ease-out);
@@ -408,7 +419,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .les h3{ font-size:clamp(16px,1.5vw,23px); font-weight:400; letter-spacing:-.005em; }
 .les h3 em{ font-style:normal; font-family:'NotoJP',sans-serif; font-size:.72em; color:var(--muted); margin-left:12px; letter-spacing:.24em; }
 .les p{ margin:0; font-size:13px; line-height:1.6; color:#909b95; text-shadow:0 1px 16px rgba(3,6,8,.92); }
-.les .t{ text-align:right; font-size:11px; letter-spacing:.14em; color:#8b958f; font-variant-numeric:tabular-nums; text-shadow:0 1px 16px rgba(3,6,8,.92); }
+.les .t{ text-align:right; font-size:11px; letter-spacing:.08em; color:#8b958f; line-height:1.45; text-shadow:0 1px 16px rgba(3,6,8,.92); }
 .les .bar{ position:absolute; left:0; bottom:-1px; height:1px; width:100%; background:var(--vermilion);
   transform:scaleX(0); transform-origin:left; transition:transform .7s var(--ease-out); }
 .les:hover .bar{ transform:scaleX(1); }
@@ -564,9 +575,9 @@ body[data-layout-story="b"] .gate-grid{
   grid-template-columns:minmax(120px,.38fr) minmax(0,1.08fr) minmax(280px,.88fr);
   gap:clamp(20px,3vw,54px);
 }
-body[data-layout-story="b"] .gate-grid h2{ grid-column:1 / 3; max-width:13ch; }
+body[data-layout-story="b"] .gate-grid h2{ grid-column:1 / 3; max-width:18ch; }
 body[data-layout-story="b"] .gate-copy{ grid-column:3; }
-body[data-layout-story="b"] .gate-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
+body[data-layout-story="b"] .gate-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; }
 body[data-layout-story="b"] .gate-stats div{ min-height:108px; padding:18px; border-left:1px solid var(--line-soft); }
 body[data-layout-story="b"] .gate-stats div:last-child{ border-right:1px solid var(--line-soft); }
 
@@ -601,8 +612,8 @@ body[data-layout-curriculum="b"] .les:nth-child(n+3){ grid-column:span 2; }
 body[data-layout-curriculum="b"] .les::before{ left:0; background:linear-gradient(145deg,rgba(224,35,28,.13),transparent 58%); }
 body[data-layout-curriculum="b"] .les:hover{ padding-left:32px; }
 body[data-layout-curriculum="b"] .les h3{ font-size:clamp(20px,2vw,30px); }
-body[data-layout-curriculum="b"] .les p{ display:block; max-width:34ch; }
-body[data-layout-curriculum="b"] .les .t{ text-align:left; margin-top:auto; }
+body[data-layout-curriculum="b"] .les p{ display:block; max-width:44ch; }
+body[data-layout-curriculum="b"] .les .t{ text-align:left; margin-top:auto; max-width:36ch; }
 
 /* — closing B · output: title stays with the other chapter heads (horizontal,
      left). The mosaic — one tall window, two stacked beside it — is the
@@ -649,6 +660,22 @@ body[data-layout-closing="b"] .fin .card:not(:first-child) .card-fr{
 .fin .card-fr::after{ z-index:1; }
 .fin .card:hover .card-fr img{ filter:brightness(.42); }
 .fin .card:hover .card-fr{ outline-color:rgba(223,231,224,.30); }
+.fin .card-play{
+  position:absolute; inset:0; z-index:2;
+  display:grid; place-items:center;
+  pointer-events:none;
+  opacity:0; transition:opacity .4s var(--ease);
+}
+.fin .card:hover .card-play{ opacity:1; }
+.fin .card-play i{
+  width:56px; height:56px;
+  border:1.5px solid rgba(223,231,224,.92);
+  border-radius:50%;
+  display:grid; place-items:center;
+  background:rgba(5,7,10,.32);
+  box-shadow:0 10px 28px rgba(0,0,0,.5);
+}
+.fin .card-play svg{ width:18px; height:18px; margin-left:3px; }
 .fin .card-lab{
   text-shadow:0 1px 18px rgba(3,6,8,.88);
 }
@@ -740,9 +767,8 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     clip-path:none; white-space:normal;
   }
 
-  body[data-layout-story="b"] .gate-stats{ grid-template-columns:repeat(2,1fr); border-right:1px solid var(--line-soft); }
+  body[data-layout-story="b"] .gate-stats{ grid-template-columns:repeat(3,1fr); border-right:1px solid var(--line-soft); }
   body[data-layout-story="b"] .gate-stats div{ min-height:86px; padding:14px; }
-  body[data-layout-story="b"] .gate-stats div:nth-child(-n+2){ border-bottom:1px solid var(--line-soft); }
   body[data-layout-story="b"] .gate-stats div:last-child{ border-right:0; }
 
   /* the mosaic unstacks, but the rhythm survives: the lead window stays the
@@ -829,7 +855,6 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <a class="nav-link" href="#gate" data-cursor><span>Our Expertise</span><span class="alt">01</span></a>
     <a class="nav-link" href="#pathways" data-cursor><span>Our Philosophy</span><span class="alt">02</span></a>
     <a class="nav-link" href="#lessons" data-cursor><span>Case Study</span><span class="alt">03</span></a>
-    <a class="nav-link" href="#eternity" data-cursor><span>Portfolio</span><span class="alt">04</span></a>
   </nav>
   <button class="nav-burger" aria-label="Menu" data-cursor><i></i><i></i></button>
 </header>
@@ -846,17 +871,26 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <img src="secret-pathways-assets/generated/01-cell-fg.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </span>
   </div>
+  <div class="sec-head" data-rv="fade">
+    <span class="k"><b>01</b> — USP &amp; Our Solution</span><span class="rule"></span><span class="k">Sectors: Academic, Cultural, Corporate • Impact: High</span>
+  </div>
   <div class="hero-top">
-    <div class="eyebrow" data-rv="fade"><span class="dot"></span> USP &amp; The Problem — Sectors: Academic, Cultural, Corporate • Impact: High</div>
     <h1 class="display h-hero">
       <span class="mask-line"><span>Research visualised.</span></span>
       <span class="mask-line"><span>Science humanised.</span></span>
     </h1>
-    <p class="hero-sub body" data-rv="up">Policymakers and grant reviewers are cognitively overloaded. We bridge the critical gap between high-value research and the public by translating complex science into accessible, high-impact audiovisual narratives.</p>
-    <a class="cta" href="#lessons" data-rv="fade" data-cursor>
-      <i></i><span>View Portfolio</span>
-      <svg viewBox="0 0 14 14" fill="none" width="13" height="13"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
-    </a>
+    <p class="hero-kicker body-lg" data-rv="up">Turning complex science into audiovisual stories that articulate impact, engage stakeholders, and secure funding.</p>
+    <p class="hero-sub body" data-rv="up">Policymakers and grant reviewers are often cognitively overloaded — but human stories cut through the noise. We act as your strategic partner, bridging the gap between high-value research and the non-scientific community by translating complex science into accessible, high-impact audiovisual narratives.</p>
+    <div class="cta-stack" data-rv="fade">
+      <a class="cta" href="#lessons" data-cursor>
+        <i></i><span>View Portfolio</span>
+        <svg viewBox="0 0 14 14" fill="none" width="13" height="13"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
+      </a>
+      <a class="cta" href="mailto:lavinia.kadar@gmail.com?cc=kbsedneer@gmail.com&subject=Inquiry:%20Science%20Media%20Lab%20" data-cursor>
+        <i></i><span>Contact Us</span>
+        <svg viewBox="0 0 14 14" fill="none" width="13" height="13"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
+      </a>
+    </div>
   </div>
 
   <div class="hero-spacer"></div>
@@ -903,42 +937,45 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </span>
   </div>
   <div class="sec-head" data-rv="fade">
-    <span class="k"><b>01</b> — Services &amp; Capabilities</span><span class="rule"></span><span class="k">Audiovisual • Staged &amp; Scripted • Motion Graphics</span>
+    <span class="k"><b>02</b> — Services &amp; Capabilities</span><span class="rule"></span><span class="k">Audiovisual SciComm • Staged &amp; Scripted Multimedia</span>
   </div>
   <div class="cur-head">
     <h2 class="display h-sec" data-rv="up">In-house end-to-end production.</h2>
-    <p class="body-lg" data-rv="up">We are a hybrid team of scientists and filmmakers. We sit at the exact intersection of science communication and premium video production.</p>
+    <div class="cur-copy" data-rv="up">
+      <p class="body-lg">We sit at the exact intersection of science communication and premium video production. We produce a range of short- and long-form multimedia content, scripted and unscripted, for various audiences and channels. From initial conceptualisation and scriptwriting to post-production and final delivery, we are with you on every step of the way, executing targeted media strategies designed to secure funding and drive societal impact.</p>
+      <p class="body-lg">We have so far produced a range of short-form popular science videos, social media campaigns (verticals/horizontals), scientific video abstracts, podcast episodes, interview videos, as well as long-form documentary films, lecture videos, and longer explainer videos of abstract scientific concepts.</p>
+    </div>
   </div>
   <div class="cur" id="cur">
     <div class="les" data-les="0" data-cursor>
       <span class="k">01</span>
-      <h3>Strategic Comms Planning</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-      <span class="t">—</span><i class="bar"></i>
+      <h3>Pre-production</h3>
+      <p>Initial product conceptualisation, ideas generation &amp; development, scientific content deconstruction, narrative scripting, factchecking.</p>
+      <span class="t">Finding the story and how to tell it</span><i class="bar"></i>
     </div>
     <div class="les" data-les="1" data-cursor>
       <span class="k">02</span>
-      <h3>Pre-production</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-      <span class="t">—</span><i class="bar"></i>
+      <h3>Studio production</h3>
+      <p>Technical execution (film and audio recording to highest professional standards, studio design and lights), editorial direction (content oversight, interviewing).</p>
+      <span class="t">Recording scripted &amp; interview material</span><i class="bar"></i>
     </div>
     <div class="les" data-les="2" data-cursor>
       <span class="k">03</span>
-      <h3>Studio production</h3>
-      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
-      <span class="t">—</span><i class="bar"></i>
+      <h3>Live-event production</h3>
+      <p>Multi-camera set-up and handling of technical equipment (camera, mic, light), stage design, live-streaming, data handling and DIT, documentary-style b-roll acquisition.</p>
+      <span class="t">Recording unscripted material</span><i class="bar"></i>
     </div>
     <div class="les" data-les="3" data-cursor>
       <span class="k">04</span>
-      <h3>Live-event production</h3>
-      <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-      <span class="t">—</span><i class="bar"></i>
+      <h3>Post-production</h3>
+      <p>Video editing (incl. multicam &amp; continuity editing), framing and pacing, creative storytelling, audio editing (podcasts), colour correction, sound design, motion graphics design.</p>
+      <span class="t">Putting the story together</span><i class="bar"></i>
     </div>
     <div class="les" data-les="4" data-cursor>
       <span class="k">05</span>
-      <h3>Post-production</h3>
-      <p>Deserunt mollit anim id est laborum, sed ut perspiciatis unde omnis.</p>
-      <span class="t">—</span><i class="bar"></i>
+      <h3>Strategic Communication</h3>
+      <p>Mapping out a concrete strategy to reach communication goals within logistical &amp; financial constraints. Includes target audience analysis, timeline building, planning of strategic materials, mapping of available communication channels, and dissemination package production for final product delivery.</p>
+      <span class="t">What do we aim for and how do we get there</span><i class="bar"></i>
     </div>
   </div>
 </section>
@@ -967,10 +1004,10 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </span>
   </div>
   <div class="sec-head" data-rv="fade">
-    <span class="k"><b>02</b> — Philosophy</span><span class="rule"></span><span class="k">Mission: Authenticity • Value: Trust • Founders: Imperial Alumni</span>
+    <span class="k"><b>03</b> — Philosophy</span><span class="rule"></span><span class="k">Mission: Authenticity • Value: Trust • Founders: Imperial Alumni</span>
   </div>
   <h2 class="display h-sec" data-rv="up">Protecting your nuance.</h2>
-  <p class="body-lg" data-rv="up">In a world of misinformation, authenticity builds trust.</p>
+  <p class="body-lg" data-rv="up">Science Media Lab is a specialised science communications and audiovisual production studio, founded by Imperial College London alumni. We are a hybrid team of scientists and filmmakers, passionate about sharing our curiosity for science with the wider public. We believe that in a world of misinformation, authenticity builds trust. We know that science is a deeply human endeavour and we embrace its complexity and messiness. We take pride in finding and crafting the human stories that allow genuine connection with audiences within the complexities of scientific research, without ever sacrificing the nuances of your science.</p>
 </section>
 
 <!-- ============================================================ chapter III -->
@@ -994,19 +1031,20 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </span>
   </div>
   <div class="sec-head" data-rv="fade">
-    <span class="k"><b>03</b> — Case Study Context</span><span class="rule"></span><span class="k">University of Oxford • Prof. Denis Noble</span>
+    <span class="k"><b>04</b> — Portfolio Case Study</span><span class="rule"></span><span class="k">University of Oxford • Prof. Denis Noble • Biological Relativity</span>
   </div>
   <div class="gate-grid">
-    <h2 class="display h-sec" data-rv="up">Case study: New perspectives.</h2>
+    <h2 class="display h-sec" data-rv="up">Case study: New perspectives on 21st century evolution.</h2>
     <div class="gate-copy">
-      <p class="lead" data-rv="up">A multi-format media partnership capturing The 2026 Evolution Conference.</p>
+      <p class="lead" data-rv="up">A multi-format media production partnership. We conceptualised, scripted and produced accessible scicomm &amp; educational videos for public and undergraduate-level audiences, handling all editing, custom motion graphics, and sound design, alongside capturing and editing a full scientific conference and selected speaker interviews. Working closely together with high-profile Professor Denis Noble, we rigorously deconstructed 21st century evolutionary biology concepts and turned them into nuanced narratives for public and academic consumption, alongside managing a 3-camera hybrid event setup and full-scale post-production.</p>
+      <p class="case-fact" data-rv="up"><b>Client</b> Professor Emeritus Denis Noble &amp; Voices from Oxford, University of Oxford</p>
+      <p class="case-fact" data-rv="up"><b>Services</b> Conceptualisation and production of a series of bespoke scicomm and educational videos including scientific content deconstruction, interviewing and scripting, and motion graphic design, multi-cam capturing of the entire hybrid conference over 3 days, filming of selected speaker interviews, b-roll acquisition, event photography, and full-scale post production of all gathered materials.</p>
     </div>
   </div>
   <div class="gate-stats" data-rv="up">
-    <div><b>XX</b><span>Hours Captured</span></div>
-    <div><b>XX</b><span>Hours Edited</span></div>
-    <div><b>25</b><span>Lectures</span></div>
-    <div><b>8</b><span>Short-form</span></div>
+    <div><b>2</b><span>SciComm Videos</span></div>
+    <div><b>25</b><span>Lecture Videos</span></div>
+    <div><b>6</b><span>Interviews</span></div>
   </div>
 </section>
 
@@ -1030,14 +1068,14 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <img src="secret-pathways-assets/foreground/png/04-transparent.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </span>
   </div>
-  <div class="eyebrow" data-rv="fade">Case Study Output — SciComm Videos • Lectures • Interviews</div>
-  <h2 class="display h-sec" data-rv="up">Output</h2>
-  <p class="body-lg" data-rv="up">Tailored dissemination for dual audiences.</p>
+  <h2 class="display h-sec" data-rv="up">Output.</h2>
+  <p class="body-lg" data-rv="up">View selected productions below:</p>
   <div class="cards" id="cards">
     <article class="card" data-rv="up" data-cursor>
       <a href="https://youtu.be/8OZrdJOV8xs" target="_blank" rel="noopener noreferrer">
         <div class="card-fr">
           <img src="secret-pathways-assets/generated/05-thumb-1.webp" alt="Can organisms change their genomes?" width="1200" height="1500" loading="lazy" decoding="async">
+          <div class="card-play" aria-hidden="true"><i><svg viewBox="0 0 24 24" fill="#dfe7e0"><path d="M8 5v14l11-7z"/></svg></i></div>
           <div class="card-lab"><b>Can Organisms change their genomes?</b></div>
           <div class="card-ar" aria-hidden="true">
             <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
@@ -1050,6 +1088,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <a href="https://youtu.be/tl5fyoSpNOM" target="_blank" rel="noopener noreferrer">
         <div class="card-fr">
           <img src="secret-pathways-assets/generated/05-thumb-2.webp" alt="The Great Cellular Merger" width="1200" height="750" loading="lazy" decoding="async">
+          <div class="card-play" aria-hidden="true"><i><svg viewBox="0 0 24 24" fill="#dfe7e0"><path d="M8 5v14l11-7z"/></svg></i></div>
           <div class="card-lab"><b>The Great Cellular Merger</b></div>
           <div class="card-ar" aria-hidden="true">
             <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
@@ -1062,6 +1101,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <a href="https://youtu.be/SXzJQ-h6Ec0" target="_blank" rel="noopener noreferrer">
         <div class="card-fr">
           <img src="secret-pathways-assets/generated/05-thumb-3.webp" alt="In conversation with Denis Noble" width="1200" height="750" loading="lazy" decoding="async">
+          <div class="card-play" aria-hidden="true"><i><svg viewBox="0 0 24 24" fill="#dfe7e0"><path d="M8 5v14l11-7z"/></svg></i></div>
           <div class="card-lab"><b>In conversation with Denis Noble</b></div>
           <div class="card-ar" aria-hidden="true">
             <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
@@ -1100,12 +1140,10 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <li><a href="#gate" data-cursor>Our Expertise</a></li>
       <li><a href="#pathways" data-cursor>Our Philosophy</a></li>
       <li><a href="#lessons" data-cursor>Case Study</a></li>
-      <li><a href="#eternity" data-cursor>Portfolio</a></li>
     </ul></div>
     <div><h4>Contact</h4><ul>
-      <li><a href="#top" data-cursor>Email</a></li>
-      <li><a href="#top" data-cursor>Instagram</a></li>
-      <li><a href="#top" data-cursor>LinkedIn</a></li>
+      <li><a href="mailto:lavinia.kadar@gmail.com?cc=kbsedneer@gmail.com&subject=Inquiry:%20Science%20Media%20Lab%20" data-cursor>Email</a></li>
+      <li><a href="https://www.linkedin.com/company/sciencemedia-lab/" target="_blank" rel="noopener noreferrer" data-cursor>LinkedIn</a></li>
     </ul></div>
     <div><h4>Studio</h4><ul>
       <li><a href="#top" data-cursor>About SML</a></li>
@@ -1341,18 +1379,17 @@ const WORD = { reveal: 0 };
 const RIG = { prog: 0, smooth: 0, z: 0, mx: 0, my: 0, tmx: 0, tmy: 0, intro: 0, focus: -1, focusAmt: 0 };
 const Z_GAP = 24;
 let virtualCameraZ = 0;
-/* One shared Z tunnel. Incoming plates still land at chapter entry.
-   Outgoing plates recede linearly (no fade) and stay in the distance.
-   Fade-in uses the same linear duration as the recede, and starts a
-   beat earlier so the new scene is already present as the old one
-   finishes pulling back. */
-const Z_BURST = 0.24;
-const Z_SPAN = 0.26;
+/* One shared Z tunnel. Zoom-out starts earlier than zoom-in, but both
+   finish at the next chapter's entry so the motions meet instead of the
+   outgoing plate sitting still while the next one arrives. */
 const Z_OUT_START = 0.46;
-const Z_OUT_END = 0.70;
-const Z_IN_DELAY = 0.08;
+const Z_OUT_END = 1.00;
+const Z_SPAN = 0.34;
+const Z_BURST = 0.24;
+const Z_IN_DELAY = 0.06;
 const Z_FLY_OUT = 0.24;
 const Z_FLY_IN = 2.45;
+const Z_COLLAGE_FADE = 0.10;
 
 const _fogA = new THREE.Color(), _fogB = new THREE.Color(), _fogT = new THREE.Color();
 const CH_ATMO = [
@@ -1651,7 +1688,7 @@ function applyZLayers() {
       const w = sat((u - Z_IN_DELAY) / (1 - Z_IN_DELAY));
       const k = 1 - Math.pow(1 - w, 2.6);
       scale = lerp(Z_FLY_IN, s1, k);
-      op = sat((p - (W.in1 - Z_SPAN)) / Z_BURST);
+      op = u;
     } else if (p >= W.on0 && p <= W.on1) {
       phase = 'on';
       scale = zOnScale(p - W.on0, L.depth);
@@ -1661,7 +1698,12 @@ function applyZLayers() {
       const s0 = zOnScale(Z_OUT_START, L.depth);
       const g = recedeGenerations(p, L.home, last);
       scale = Math.max(0.02, s0 * Math.pow(Z_FLY_OUT / s0, g));
-      op = 1 - sat((p - (last - Z_SPAN)) / Z_BURST);
+      if (L.home === last - 1) {
+        const fade0 = L.home + Z_OUT_START + (Z_OUT_END - Z_OUT_START) * 0.38;
+        op = 1 - sat((p - fade0) / Z_COLLAGE_FADE);
+      } else {
+        op = 1 - sat((p - (last - Z_SPAN)) / Z_BURST);
+      }
     }
 
     if (op < 0.012) {
@@ -2599,7 +2641,7 @@ function wireHeroExit() {
 function wireNav() {
   let last = 0;
   const rail = $('#rail');
-  const names = ['Why SML', 'Our Expertise', 'Our Philosophy', 'Case Study', 'Portfolio', 'Footer'];
+  const names = ['Why SML', 'Our Expertise', 'Our Philosophy', 'Case Study', 'Output', 'Footer'];
   SECS.forEach((s, i) => {
     const b = document.createElement('button');
     b.innerHTML = '<i></i>'; b.title = names[i] || '';
@@ -2634,11 +2676,8 @@ function wireNav() {
   links.forEach(link => link.addEventListener('click', closeMenu));
   addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
   addEventListener('resize', () => { if (vpW() > 820) closeMenu(); }, { passive:true });
-  /* Which chapter each link actually points at, read off its href. The old
-     rule was positional — link i lit for section i+1 — which silently assumed
-     one link per section in matching order. With five links over four chapters
-     every entry past the third lit for its neighbour: standing in Afterlight
-     highlighted Stories. Reading the destination cannot drift. */
+  /* Which chapter each link actually points at, read off its href. Output
+     continues the Case Study chapter, so that tab stays live through #eternity. */
   const linkSec = links.map(l => SECS.indexOf(document.querySelector(l.getAttribute('href'))));
   window.addEventListener('scroll', () => {
     const y = scrollY;
@@ -2652,7 +2691,10 @@ function wireNav() {
     if (a !== activeSec) {
       activeSec = a;
       dots.forEach((d, i) => d.classList.toggle('on', i === a));
-      links.forEach((l, i) => l.classList.toggle('on', linkSec[i] === a));
+      links.forEach((l, i) => {
+        const sec = linkSec[i];
+        l.classList.toggle('on', sec === a || (a === 4 && sec === 3));
+      });
     }
   }, { passive: true });
   $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
