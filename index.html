@@ -604,39 +604,55 @@ body[data-layout-curriculum="b"] .les h3{ font-size:clamp(20px,2vw,30px); }
 body[data-layout-curriculum="b"] .les p{ display:block; max-width:34ch; }
 body[data-layout-curriculum="b"] .les .t{ text-align:left; margin-top:auto; }
 
-/* — closing B · gallery: the title hangs vertically on the right while the
-     chapter mark, the last line and the call to action run down the left. */
+/* — closing B · output: title stays with the other chapter heads (horizontal,
+     left). The mosaic — one tall window, two stacked beside it — is the
+     original kage gallery, reinstated here for the case-study films. */
 body[data-layout-closing="b"] .fin{
-  display:grid; grid-template-columns:minmax(260px,.7fr) minmax(0,1.3fr); grid-template-rows:auto auto auto;
-  align-content:center; align-items:end; text-align:left;
-  column-gap:clamp(40px,7vw,120px); row-gap:clamp(16px,2.6vh,30px);
+  display:flex; flex-direction:column; align-items:stretch; justify-content:center;
+  text-align:left;
 }
-body[data-layout-closing="b"] .fin .eyebrow{ grid-column:1; grid-row:1; margin:0; }
+body[data-layout-closing="b"] .fin .eyebrow{ margin:0 0 26px; }
 body[data-layout-closing="b"] .fin h2{
-  grid-column:2; grid-row:1 / 4; align-self:center; justify-self:end;
-  font-size:clamp(52px,6vw,82px); writing-mode:vertical-rl;
+  writing-mode:horizontal-tb; align-self:start; justify-self:start;
+  font-size:clamp(30px,4.0vw,60px); line-height:1.055; letter-spacing:-.012em;
 }
-body[data-layout-closing="b"] .fin p{ grid-column:1; grid-row:2; margin:0; }
-body[data-layout-closing="b"] .fin .cta{ grid-column:1; grid-row:3; justify-self:start; margin-top:4px; }
+body[data-layout-closing="b"] .fin p{ margin:18px 0 0; max-width:44ch; }
 body[data-layout-closing="b"] .fin .cards{
-  grid-column:1 / -1; grid-row:4; width:100%;
-  margin-top:clamp(28px,5vh,56px);
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  grid-template-rows:auto;
-  gap:clamp(10px,1.4vw,22px);
+  grid-column:auto; grid-row:auto; width:100%;
+  margin-top:clamp(34px,6vh,72px);
+  grid-template-columns:minmax(0,1.55fr) minmax(240px,.75fr);
+  grid-template-rows:repeat(2,minmax(0,1fr));
+  gap:14px; align-items:stretch;
 }
 body[data-layout-closing="b"] .fin .card{
-  transform:none; display:block; min-height:0;
+  transform:none; display:flex; flex-direction:column; min-height:0;
 }
-body[data-layout-closing="b"] .fin .card:first-child{ grid-row:auto; }
-.sml-thumbnail{
-  display:block; position:relative; overflow:hidden; aspect-ratio:4 / 5;
-  outline:1px solid var(--line-soft); outline-offset:-1px;
-  transition:outline-color .5s var(--ease), transform .5s var(--ease);
+body[data-layout-closing="b"] .fin .card > a{
+  display:flex; flex-direction:column; flex:1 1 auto; min-height:0; color:inherit;
 }
-.sml-thumbnail img{ width:100%; height:100%; object-fit:cover; display:block; }
-.sml-thumbnail:hover{ outline-color:rgba(223,231,224,.42); transform:translate3d(0,-4px,0); }
-.card > .sml-thumbnail{ width:100%; }
+body[data-layout-closing="b"] .fin .card:first-child{ grid-row:1 / 3; }
+body[data-layout-closing="b"] .fin .card:first-child .card-fr{
+  flex:1 1 auto; height:min(64vh,680px); min-height:280px; aspect-ratio:auto;
+}
+body[data-layout-closing="b"] .fin .card:not(:first-child) .card-fr{
+  flex:1 1 auto; min-height:160px; aspect-ratio:auto;
+}
+.fin .card-fr{
+  overflow:hidden; background:#0a0e12 !important;
+}
+.fin .card-ar{ display:grid; place-items:center; }
+.fin .card-fr img{
+  position:absolute; inset:0; width:100%; height:100%; max-width:none;
+  object-fit:cover; display:block; z-index:0;
+  transition:filter .55s var(--ease);
+}
+.fin .card-fr::after{ z-index:1; }
+.fin .card:hover .card-fr img{ filter:brightness(.42); }
+.fin .card:hover .card-fr{ outline-color:rgba(223,231,224,.30); }
+.fin .card-lab{
+  text-shadow:0 1px 18px rgba(3,6,8,.88);
+}
+.fin .card-lab b{ max-width:22ch; line-height:1.25; }
 
 /* — footer B · manifesto: the statement leads, the navigation becomes a
      compact ruled index beneath it. */
@@ -741,12 +757,18 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   body[data-layout-curriculum="b"] .les:nth-child(n){ grid-column:auto; min-height:0; padding:20px; }
   body[data-layout-curriculum="b"] .les:hover{ padding-left:20px; }
 
-  body[data-layout-closing="b"] .fin{ display:flex; align-items:center; text-align:center; gap:0; }
-  body[data-layout-closing="b"] .fin .eyebrow{ margin:0 0 26px; }
-  body[data-layout-closing="b"] .fin h2{ writing-mode:horizontal-tb; font-size:clamp(38px,7.4vw,124px); }
-  body[data-layout-closing="b"] .fin p{ margin:26px auto 0; }
-  body[data-layout-closing="b"] .fin .cta{ margin-top:40px; }
-  body[data-layout-closing="b"] .fin .cards{ grid-template-columns:1fr; }
+  body[data-layout-closing="b"] .fin{ display:flex; align-items:stretch; text-align:left; gap:0; }
+  body[data-layout-closing="b"] .fin .eyebrow{ margin:0 0 22px; }
+  body[data-layout-closing="b"] .fin h2{ writing-mode:horizontal-tb; font-size:clamp(30px,7.4vw,48px); }
+  body[data-layout-closing="b"] .fin p{ margin:16px 0 0; }
+  body[data-layout-closing="b"] .fin .cards{ grid-template-columns:1fr; grid-template-rows:auto; }
+  body[data-layout-closing="b"] .fin .card:first-child{ grid-row:auto; }
+  body[data-layout-closing="b"] .fin .card:first-child .card-fr,
+  body[data-layout-closing="b"] .fin .card:not(:first-child) .card-fr{
+    flex:0 0 auto; height:auto; min-height:0;
+  }
+  body[data-layout-closing="b"] .fin .card:first-child .card-fr{ aspect-ratio:4 / 5; }
+  body[data-layout-closing="b"] .fin .card:not(:first-child) .card-fr{ aspect-ratio:16 / 10; }
 
   body[data-layout-footer="b"] .foot-grid{ grid-template-columns:1fr; }
   body[data-layout-footer="b"] .foot-brand{ grid-column:auto; grid-template-columns:minmax(0,1fr); row-gap:16px; }
@@ -1009,22 +1031,43 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </span>
   </div>
   <div class="eyebrow" data-rv="fade">Case Study Output — SciComm Videos • Lectures • Interviews</div>
-  <h2 class="display" data-rv="up">Output</h2>
+  <h2 class="display h-sec" data-rv="up">Output</h2>
   <p class="body-lg" data-rv="up">Tailored dissemination for dual audiences.</p>
   <div class="cards" id="cards">
     <article class="card" data-rv="up" data-cursor>
-      <a target="_blank" class="sml-thumbnail" href="secret-pathways-assets/generated/05-thumb-shapiro.webp">
-        <img src="secret-pathways-assets/generated/05-thumb-shapiro.webp" alt="Case study output — Shapiro" width="1200" height="1500" loading="lazy" decoding="async">
+      <a href="https://youtu.be/8OZrdJOV8xs" target="_blank" rel="noopener noreferrer">
+        <div class="card-fr">
+          <img src="secret-pathways-assets/generated/05-thumb-1.webp" alt="Can organisms change their genomes?" width="1200" height="1500" loading="lazy" decoding="async">
+          <div class="card-lab"><b>Can Organisms change their genomes?</b></div>
+          <div class="card-ar" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
+          </div>
+        </div>
+        <div class="card-meta"><span>6 MIN</span><span>Unscripted</span></div>
       </a>
     </article>
     <article class="card" data-rv="up" data-cursor>
-      <a target="_blank" class="sml-thumbnail" href="secret-pathways-assets/generated/05-thumb-cell.webp">
-        <img src="secret-pathways-assets/generated/05-thumb-cell.webp" alt="Case study output — Cell" width="1200" height="1500" loading="lazy" decoding="async">
+      <a href="https://youtu.be/tl5fyoSpNOM" target="_blank" rel="noopener noreferrer">
+        <div class="card-fr">
+          <img src="secret-pathways-assets/generated/05-thumb-2.webp" alt="The Great Cellular Merger" width="1200" height="750" loading="lazy" decoding="async">
+          <div class="card-lab"><b>The Great Cellular Merger</b></div>
+          <div class="card-ar" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
+          </div>
+        </div>
+        <div class="card-meta"><span>15 MIN</span><span>Scripted</span></div>
       </a>
     </article>
     <article class="card" data-rv="up" data-cursor>
-      <a target="_blank" class="sml-thumbnail" href="secret-pathways-assets/generated/05-thumb-noble.webp">
-        <img src="secret-pathways-assets/generated/05-thumb-noble.webp" alt="Case study output — Noble" width="1200" height="1500" loading="lazy" decoding="async">
+      <a href="https://youtu.be/SXzJQ-h6Ec0" target="_blank" rel="noopener noreferrer">
+        <div class="card-fr">
+          <img src="secret-pathways-assets/generated/05-thumb-3.webp" alt="In conversation with Denis Noble" width="1200" height="750" loading="lazy" decoding="async">
+          <div class="card-lab"><b>In conversation with Denis Noble</b></div>
+          <div class="card-ar" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
+          </div>
+        </div>
+        <div class="card-meta"><span>5 MIN</span><span>Interview</span></div>
       </a>
     </article>
   </div>
@@ -1568,6 +1611,17 @@ function zOnScale(local, depth) {
   return clamp(rest - recede, 1, 2.85);
 }
 
+function recedeGenerations(p, home, last) {
+  const span = Math.max(1e-4, Z_OUT_END - Z_OUT_START);
+  let g = 0;
+  for (let k = home; k < last; k++) {
+    const a = k + Z_OUT_START;
+    if (p <= a) break;
+    g += sat((p - a) / span);
+  }
+  return g;
+}
+
 function zWindows(home) {
   const last = SECS.length - 1;
   const terminal = home === last;
@@ -1602,17 +1656,12 @@ function applyZLayers() {
       phase = 'on';
       scale = zOnScale(p - W.on0, L.depth);
       op = 1;
-    } else if (p >= W.out0 && p <= W.out1) {
-      phase = 'out';
-      const u = sat((p - W.out0) / Math.max(1e-4, W.out1 - W.out0));
-      const s0 = zOnScale(W.on1 - W.on0, L.depth);
-      scale = lerp(s0, Z_FLY_OUT, u);
-      op = 1;
-    } else if (L.home < last && p > W.out1) {
-      phase = 'past';
-      const u = p - W.out1;
-      scale = Z_FLY_OUT / (1 + u * 0.55);
-      op = scale < 0.028 || (p - L.home) > 2.4 ? 0 : 1;
+    } else if (L.home < last && p > W.on1) {
+      phase = p <= W.out1 ? 'out' : 'past';
+      const s0 = zOnScale(Z_OUT_START, L.depth);
+      const g = recedeGenerations(p, L.home, last);
+      scale = Math.max(0.02, s0 * Math.pow(Z_FLY_OUT / s0, g));
+      op = 1 - sat((p - (last - Z_SPAN)) / Z_BURST);
     }
 
     if (op < 0.012) {
