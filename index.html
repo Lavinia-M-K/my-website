@@ -740,17 +740,25 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   top:0 !important; right:0 !important; bottom:0 !important; left:0 !important;
   width:100% !important; height:100% !important;
   max-width:none !important;
-  overflow:hidden;
+  /* Clip lives on #fg-sky, not here: overflow:hidden would crop the bitmap
+     to the viewport *before* scale, so zoom-out shrank a crop instead of
+     revealing the rest of the plate. */
+  overflow:visible;
   opacity:0; visibility:hidden;
   transform-origin:50% 50%;
   pointer-events:none;
   transition:none !important;
 }
 .fg-el[data-depth] > img{
-  position:absolute !important; inset:0 !important;
-  width:100% !important; height:100% !important;
+  position:absolute !important;
+  inset:auto !important;
+  left:50% !important; top:50% !important;
+  /* Cover-minimum of the viewport, full image — JS writes exact px on resize. */
+  width:max(var(--vw, 100%), calc(var(--vh, 100vh) * 16 / 9));
+  height:max(var(--vh, 100vh), calc(var(--vw, 100%) * 9 / 16));
   max-width:none !important; max-height:none !important;
-  object-fit:cover; object-position:center;
+  transform:translate(-50%, -50%);
+  object-fit:fill; object-position:center;
   opacity:1;
   filter:saturate(.94) brightness(.97);
   pointer-events:none;
@@ -1644,6 +1652,19 @@ function applyCamera() {
 function layoutWord() {}
 
 const ZLAYERS = [];
+function sizeZLayerPlates() {
+  const w = vpW(), h = vpH();
+  ZLAYERS.forEach(L => {
+    const img = L.img;
+    if (!img) return;
+    const iw = img.naturalWidth || parseFloat(img.getAttribute('width')) || 1920;
+    const ih = img.naturalHeight || parseFloat(img.getAttribute('height')) || 1080;
+    if (!iw || !ih) return;
+    const s = Math.max(w / iw, h / ih);
+    img.style.width = Math.ceil(iw * s) + 'px';
+    img.style.height = Math.ceil(ih * s) + 'px';
+  });
+}
 function wireZLayers() {
   const sky = document.getElementById('fg-sky');
   $$('.fg').forEach(stage => {
@@ -1653,16 +1674,24 @@ function wireZLayers() {
     stage.style.zIndex = String(cam);
     stage.querySelectorAll('.fg-el[data-depth]').forEach(el => {
       const img = el.querySelector('img');
-      if (img) img.loading = 'eager';
+      if (img) {
+        img.loading = 'eager';
+        if (!img.dataset.zSized) {
+          img.dataset.zSized = '1';
+          img.addEventListener('load', sizeZLayerPlates, { passive: true });
+        }
+      }
       const depth = parseFloat(el.getAttribute('data-depth'));
       ZLAYERS.push({
         el: el,
+        img: img,
         home: cam,
         depth: isFinite(depth) ? Math.max(0.6, depth) : 2
       });
       el.removeAttribute('style');
     });
   });
+  sizeZLayerPlates();
 }
 
 function zOnScale(local, depth) {
@@ -2905,6 +2934,7 @@ const INTRO = { t0: 0 };
 function resize() {
   const w = vpW(), h = vpH();
   document.documentElement.style.setProperty('--vw', w + 'px');
+  document.documentElement.style.setProperty('--vh', h + 'px');
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, DPR_CAP) * PERF.scale);
   renderer.setSize(w, h, true);
   camera.aspect = w / h; camera.updateProjectionMatrix();
@@ -2924,6 +2954,7 @@ function resize() {
   if (WORLD.dust) WORLD.dust.material.uniforms.uSize.value = h * renderer.getPixelRatio() * .48;
   if (WORLD.molecules) WORLD.molecules.material.uniforms.uSize.value = h * renderer.getPixelRatio() * .72;
   if (WISP.mesh) WISP.mesh.material.uniforms.uPx.value = h * renderer.getPixelRatio();
+  sizeZLayerPlates();
   measure();
 }
 
