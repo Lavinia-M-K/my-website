@@ -303,7 +303,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
           mask-image:linear-gradient(transparent, #000 44%);
 }
 #pathways::before{ background:radial-gradient(108% 64% at 50% 50%, rgba(4,7,10,.70), rgba(4,7,10,.44) 50%, rgba(4,7,10,0)); }
-#eternity::before{ background:radial-gradient(82% 58% at 50% 46%, rgba(4,7,10,.26), rgba(4,7,10,.66) 56%, rgba(4,7,10,.90) 82%, rgba(4,7,10,0)); }
+#eternity::before{ inset:-22% -4% 0 -4%; }
 .foot::before{
   content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
   background:linear-gradient(rgba(4,7,10,.55), rgba(4,7,10,.94) 40%, rgba(4,7,10,.98));
@@ -525,11 +525,13 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .fin{ min-height:100svh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
 .fin .eyebrow{ margin-bottom:26px; }
 .fin h2{ font-size:clamp(38px,7.4vw,124px); line-height:.94; letter-spacing:-.03em; text-transform:uppercase; }
-.fin p{ max-width:44ch; margin:26px auto 0; position:relative; isolation:isolate; }
-.fin > .h-sec, .fin > .body-lg{ position:relative; isolation:isolate; }
-.fin > .h-sec::before, .fin > .body-lg::before{
-  content:''; position:absolute; inset:-18px -28px; z-index:-1; pointer-events:none;
-  background:radial-gradient(78% 72% at 28% 42%, rgba(5,7,10,.5), rgba(5,7,10,.16) 54%, transparent 76%);
+.fin p{ max-width:44ch; margin:26px auto 0; }
+.fin .display, .fin .body-lg, .fin .word{
+  filter:none;
+  text-shadow:
+    0 1px 1px rgba(3,6,8,.95),
+    0 0 2px rgba(3,6,8,.85),
+    0 1px 3px rgba(3,6,8,.7);
 }
 .cta{
   position:relative; display:inline-flex; align-items:center; gap:14px; margin-top:44px;
@@ -1160,8 +1162,8 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </div>
   </div>
   <div class="gate-stats" data-rv="up">
-    <div><b>XX</b><span>Hours Captured</span></div>
-    <div><b>XX</b><span>Hours Edited</span></div>
+    <div><b>77</b><span>Hours Captured</span></div>
+    <div><b>19</b><span>Hours Edited</span></div>
     <div><b>25</b><span>Lectures</span></div>
     <div><b>8</b><span>Short-form</span></div>
   </div>
@@ -1213,7 +1215,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
             <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
           </div>
         </div>
-        <div class="card-meta"><span>15 MIN</span><span>Scripted</span></div>
+        <div class="card-meta"><span>14 MIN</span><span>Scripted</span></div>
       </a>
     </article>
     <article class="card" data-rv="up" data-cursor>
@@ -1226,7 +1228,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
             <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M3 11 11 3M5 3h6v6" stroke="#dfe7e0" stroke-width="1.3"/></svg>
           </div>
         </div>
-        <div class="card-meta"><span>5 MIN</span><span>Interview</span></div>
+        <div class="card-meta"><span>15 MIN</span><span>Interview</span></div>
       </a>
     </article>
   </div>
