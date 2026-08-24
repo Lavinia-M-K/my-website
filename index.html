@@ -66,13 +66,39 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .display{
   text-transform:uppercase; line-height:1.055; letter-spacing:-.012em;
-  font-weight:400; text-shadow:0 2px 34px rgba(3,6,8,.72);
+  font-weight:400;
+  text-shadow:
+    0 0 .03em rgba(3,6,8,.95),
+    0 1px 1px rgba(3,6,8,.9),
+    0 0 12px rgba(3,6,8,.62),
+    0 0 28px rgba(3,6,8,.4);
+  filter:
+    drop-shadow(0 0 2px rgba(5,7,10,.7))
+    drop-shadow(0 2px 10px rgba(5,7,10,.4));
 }
-.h-hero{ font-size:clamp(26px,3.05vw,46px); }
-.h-sec{ font-size:clamp(30px,4.0vw,60px); }
-.body-lg{ font-size:clamp(14px,1.02vw,17px); line-height:1.72; color:#b4bfb7; font-weight:300; text-shadow:0 1px 20px rgba(3,6,8,.88); }
-.body{ font-size:14px; line-height:1.68; color:#9aa5a0; font-weight:300; text-shadow:0 1px 18px rgba(3,6,8,.85); }
-.num{ font-size:clamp(26px,2.5vw,36px); font-weight:300; letter-spacing:-.02em; color:var(--bone); font-variant-numeric:tabular-nums; }
+.h-hero,.h-sec{ font-size:clamp(30px,4.0vw,60px); }
+.body-lg{ font-size:clamp(14px,1.02vw,17px); line-height:1.72; color:#b4bfb7; font-weight:300;
+  text-shadow:
+    0 0 .04em rgba(3,6,8,.96),
+    0 1px 1px rgba(3,6,8,.92),
+    0 0 10px rgba(3,6,8,.7),
+    0 0 22px rgba(3,6,8,.48);
+  filter:
+    drop-shadow(0 0 2px rgba(5,7,10,.72))
+    drop-shadow(0 1px 8px rgba(5,7,10,.38));
+}
+.body{ font-size:clamp(14px,1.02vw,17px); line-height:1.72; color:#9aa5a0; font-weight:300;
+  text-shadow:
+    0 0 .04em rgba(3,6,8,.96),
+    0 1px 1px rgba(3,6,8,.92),
+    0 0 10px rgba(3,6,8,.7),
+    0 0 22px rgba(3,6,8,.48);
+  filter:
+    drop-shadow(0 0 2px rgba(5,7,10,.72))
+    drop-shadow(0 1px 8px rgba(5,7,10,.38));
+}
+.num{ font-size:clamp(26px,2.5vw,36px); font-weight:300; letter-spacing:-.02em; color:var(--bone); font-variant-numeric:tabular-nums;
+  text-shadow:0 1px 12px rgba(3,6,8,.9), 0 0 20px rgba(3,6,8,.4); }
 
 /* ============================================================= reveal */
 [data-rv]{ opacity:0; }
@@ -80,11 +106,11 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 [data-rv="fade"]{ transform:none; }
 [data-rv].rv-in{ opacity:1; transform:none;
   transition:opacity .9s var(--ease-out), transform 1.05s var(--ease-out); }
-.mask-line{ display:block; overflow:hidden; }
+.mask-line{ display:block; overflow:hidden; padding:0 .16em .28em; margin:0 -.16em -.28em; }
 .mask-line:not(.word-reveal) > span{ display:block; transform:translate3d(0,110%,0); }
 .rv-in .mask-line:not(.word-reveal) > span, .mask-line:not(.word-reveal).rv-in > span{ transform:none; }
 .mask-line:not(.word-reveal) > span{ transition:transform 1.05s var(--ease-out); }
-.word-mask{ display:inline-block; overflow:hidden; vertical-align:top; }
+.word-mask{ display:inline-block; overflow:hidden; vertical-align:top; padding:0 .14em .3em; margin:0 -.14em -.3em; }
 .word{
   display:inline-block; opacity:0; transform:translate3d(0,112%,0); will-change:transform,opacity;
   transition:transform .82s var(--ease-out), opacity .5s var(--ease-out);
@@ -165,7 +191,11 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .hero{ position:relative; min-height:100svh; padding:0 var(--pad); display:flex; flex-direction:column; }
 .hero::before{ content:''; position:absolute; left:0; right:0; top:0; height:46%; z-index:1; pointer-events:none;
   background:linear-gradient(rgba(3,6,9,.72), rgba(3,6,9,.34) 46%, transparent); }
-.hero-top{ padding-top:0; max-width:min(560px,46vw); position:relative; z-index:2; }
+.hero-top{ padding-top:0; max-width:min(640px,52vw); position:relative; z-index:2; isolation:isolate; }
+.hero-top::before{
+  content:''; position:absolute; inset:-10% -16% 6% -10%; z-index:-1; pointer-events:none;
+  background:radial-gradient(72% 68% at 28% 36%, rgba(5,7,10,.55), rgba(5,7,10,.2) 48%, transparent 74%);
+}
 .hero-top .eyebrow{ display:flex; align-items:center; gap:10px; margin-bottom:20px; }
 .hero-top .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background:var(--vermilion); box-shadow:0 0 10px var(--vermilion); }
 .hero > .sec-head{
@@ -177,14 +207,36 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .hero-kicker{
   margin:0 0 16px; max-width:46ch;
   font-size:clamp(18px,1.45vw,21px); font-weight:700; line-height:1.45;
+  text-shadow:
+    0 1px 1px rgba(3,6,8,.95),
+    0 0 10px rgba(3,6,8,.75),
+    0 0 22px rgba(3,6,8,.52),
+    0 3px 32px rgba(3,6,8,.42);
 }
-.hero-sub{ max-width:46ch; text-shadow:0 1px 26px rgba(3,6,8,.95); }
+.hero-sub{
+  position:relative; max-width:46ch; isolation:isolate;
+  text-shadow:
+    0 0 .05em rgba(3,6,8,.98),
+    0 1px 2px rgba(3,6,8,.95),
+    0 0 8px rgba(3,6,8,.82),
+    0 0 18px rgba(3,6,8,.62),
+    0 0 32px rgba(3,6,8,.42);
+  filter:
+    drop-shadow(0 0 3px rgba(5,7,10,.8))
+    drop-shadow(0 2px 12px rgba(5,7,10,.5));
+}
+.hero-sub::before{
+  content:''; position:absolute; inset:-14px -22px -12px -12px; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(90% 85% at 38% 48%, rgba(5,7,10,.58), rgba(5,7,10,.26) 46%, transparent 78%);
+}
 .cta-stack{ display:flex; flex-direction:column; align-items:flex-start; gap:12px; margin-top:44px; }
 .cta-stack .cta{ margin-top:0; }
 .hero-spacer{ flex:1 1 auto; min-height:clamp(140px,26vh,300px); }
 .hero-foot{ padding-bottom:clamp(22px,4.2vh,42px); position:relative; z-index:2; }
 .hero-cue{ display:flex; align-items:center; justify-content:flex-end; gap:12px; margin-bottom:14px;
-  font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); }
+  font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:var(--muted);
+  text-shadow:0 1px 10px rgba(3,6,8,.9), 0 0 16px rgba(3,6,8,.45); }
 .hero-cue .track{ width:54px; height:1px; background:var(--line); position:relative; overflow:hidden; }
 .hero-cue .track i{ position:absolute; inset:0; background:var(--bone); transform-origin:left;
   animation:cue 2.8s var(--ease-io) infinite; }
@@ -199,7 +251,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
   color:var(--bone-dim); margin-bottom:6px; transition:color .4s;
   text-shadow:0 1px 16px rgba(3,6,8,.9); }
 .chip p{ margin:0; font-size:11px; line-height:1.5; color:#7d8781; max-width:22ch;
-  transition:color .4s; }
+  transition:color .4s; text-shadow:0 1px 12px rgba(3,6,8,.9), 0 0 18px rgba(3,6,8,.45); }
 .chip:hover .num{ color:var(--ember); transform:translate3d(0,-2px,0); }
 .chip:hover b{ color:var(--bone); }
 .chip:hover p{ color:var(--bone-dim); }
@@ -232,7 +284,8 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
   position:absolute; z-index:2; right:var(--pad); top:50%; transform:translateY(-50%);
   display:flex; flex-direction:column; align-items:center; gap:14px; pointer-events:none;
 }
-.hero-side .v{ writing-mode:vertical-rl; font-size:13px; letter-spacing:.62em; color:rgba(223,231,224,.5); }
+.hero-side .v{ writing-mode:vertical-rl; font-size:13px; letter-spacing:.62em; color:rgba(223,231,224,.5);
+  text-shadow:0 1px 12px rgba(3,6,8,.9), 0 0 18px rgba(3,6,8,.4); }
 @keyframes cue{ 0%{transform:scaleX(0)} 42%{transform:scaleX(1)} 100%{transform:scaleX(1) translateX(100%)} }
 
 /* ============================================================= sections */
@@ -260,26 +313,48 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
   display:grid; grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
   gap:clamp(28px,5vw,90px); align-items:start;
 }
-.path-split .body-lg{ margin:0; max-width:54ch; }
-.path-split h2{ max-width:12ch; }
-.sec-head .k{ font-size:10px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
+.path-split .body-lg{ margin:0; max-width:54ch; position:relative; isolation:isolate; }
+.path-split .body-lg::before{
+  content:''; position:absolute; inset:-20px -28px; z-index:-1; pointer-events:none;
+  background:radial-gradient(78% 72% at 30% 40%, rgba(5,7,10,.5), rgba(5,7,10,.16) 54%, transparent 76%);
+}
+.path-split h2{ max-width:12ch; position:relative; isolation:isolate; }
+.path-split h2::before{
+  content:''; position:absolute; inset:-12% -10% -8% -8%; z-index:-1; pointer-events:none;
+  background:radial-gradient(72% 68% at 30% 40%, rgba(5,7,10,.48), rgba(5,7,10,.14) 52%, transparent 74%);
+}
+.sec-head .k{ font-size:10px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);
+  text-shadow:0 1px 10px rgba(3,6,8,.9), 0 0 16px rgba(3,6,8,.45); }
 .sec-head .k b{ color:var(--vermilion); font-weight:500; }
 .rule{ flex:1 1 auto; height:1px; background:var(--line-soft); }
 
 /* — chapter I: the gate */
 .gate-grid{ display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.82fr); gap:clamp(28px,5vw,90px); align-items:start; }
 .gate-grid h2{ max-width:18ch; }
+.gate-main{ position:relative; isolation:isolate; }
+.gate-main::before{
+  content:''; position:absolute; inset:-18px -24px -12px -10px; z-index:-1; pointer-events:none;
+  background:radial-gradient(78% 70% at 28% 38%, rgba(5,7,10,.5), rgba(5,7,10,.16) 54%, transparent 76%);
+}
 .gate-main .lead{
   margin:20px 0 0; max-width:54ch;
-  font-size:clamp(15px,1.16vw,19px); line-height:1.66; color:#c2cdc5; text-shadow:0 1px 20px rgba(3,6,8,.9);
 }
-.gate-copy{ padding-top:6px; }
-.gate-copy .lead{ font-size:clamp(15px,1.16vw,19px); line-height:1.66; color:#c2cdc5; text-shadow:0 1px 20px rgba(3,6,8,.9); }
+.gate-copy{ padding-top:6px; position:relative; isolation:isolate; }
+.gate-copy::before{
+  content:''; position:absolute; inset:-16px -20px; z-index:-1; pointer-events:none;
+  background:radial-gradient(80% 72% at 30% 30%, rgba(5,7,10,.46), rgba(5,7,10,.14) 56%, transparent 76%);
+}
 .gate-copy .lead + p, .gate-copy p + p{ margin-top:20px; }
-.case-fact{ margin:18px 0 0; font-size:13px; line-height:1.65; color:#9aa5a0; text-shadow:0 1px 16px rgba(3,6,8,.92); }
+.case-fact{ margin:18px 0 0; font-size:clamp(14px,1.02vw,17px); line-height:1.72; color:#9aa5a0;
+  text-shadow:
+    0 1px 1px rgba(3,6,8,.94),
+    0 0 8px rgba(3,6,8,.7),
+    0 0 18px rgba(3,6,8,.5),
+    0 2px 28px rgba(3,6,8,.4);
+}
 .gate-copy .case-fact:first-child{ margin-top:0; }
-.gate-copy .case-fact:first-child{ margin-top:0; }
-.case-fact b{ display:block; font-size:10px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--bone-dim); margin-bottom:6px; }
+.case-fact b{ display:block; font-size:10px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--bone-dim); margin-bottom:6px;
+  text-shadow:0 1px 10px rgba(3,6,8,.9), 0 0 16px rgba(3,6,8,.4); }
 .arrowlink{ display:inline-flex; align-items:center; gap:12px; margin-top:34px;
   font-size:11px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--bone); }
 .arrowlink .ar{ width:34px; height:34px; border:1px solid var(--line); border-radius:50%;
@@ -289,8 +364,10 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .arrowlink:hover .ar svg{ transform:translate3d(2px,-2px,0); }
 .arrowlink:hover .ar svg path{ stroke:#05070a; }
 .gate-stats{ display:flex; gap:clamp(24px,4vw,62px); margin-top:clamp(46px,8vh,96px); border-top:1px solid var(--line-soft); padding-top:24px; }
-.gate-stats div b{ display:block; font-size:clamp(22px,2.1vw,32px); font-weight:300; letter-spacing:-.02em; }
-.gate-stats div span{ font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+.gate-stats div b{ display:block; font-size:clamp(22px,2.1vw,32px); font-weight:300; letter-spacing:-.02em;
+  text-shadow:0 1px 12px rgba(3,6,8,.9), 0 0 22px rgba(3,6,8,.45); }
+.gate-stats div span{ font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted);
+  text-shadow:0 1px 10px rgba(3,6,8,.88); }
 
 /* — chapter II: pathways cards */
 .cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(10px,1.4vw,22px); align-items:start; }
@@ -415,6 +492,11 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 /* — chapter III: curriculum */
 .cur-head{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.72fr); gap:clamp(28px,5vw,90px); align-items:end; margin-bottom:clamp(34px,6vh,72px); }
 .cur-head h2{ max-width:13ch; }
+.cur-copy{ position:relative; isolation:isolate; }
+.cur-copy::before{
+  content:''; position:absolute; inset:-18px -26px; z-index:-1; pointer-events:none;
+  background:radial-gradient(78% 70% at 28% 36%, rgba(5,7,10,.5), rgba(5,7,10,.16) 54%, transparent 76%);
+}
 .cur-copy .body-lg + .body-lg{ margin-top:16px; }
 .cur{ border-top:1px solid var(--line-soft); }
 .les{
@@ -443,17 +525,23 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .fin{ min-height:100svh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
 .fin .eyebrow{ margin-bottom:26px; }
 .fin h2{ font-size:clamp(38px,7.4vw,124px); line-height:.94; letter-spacing:-.03em; text-transform:uppercase; }
-.fin p{ max-width:44ch; margin:26px auto 0; }
+.fin p{ max-width:44ch; margin:26px auto 0; position:relative; isolation:isolate; }
+.fin > .h-sec, .fin > .body-lg{ position:relative; isolation:isolate; }
+.fin > .h-sec::before, .fin > .body-lg::before{
+  content:''; position:absolute; inset:-18px -28px; z-index:-1; pointer-events:none;
+  background:radial-gradient(78% 72% at 28% 42%, rgba(5,7,10,.5), rgba(5,7,10,.16) 54%, transparent 76%);
+}
 .cta{
   position:relative; display:inline-flex; align-items:center; gap:14px; margin-top:44px;
   padding:17px 30px; border:1px solid var(--line); border-radius:100px; overflow:hidden;
   font-size:11px; font-weight:500; letter-spacing:.22em; text-transform:uppercase;
   transition:color .45s var(--ease), border-color .45s;
+  text-shadow:0 1px 10px rgba(3,6,8,.85);
 }
 .cta i{ position:absolute; inset:0; background:var(--bone); transform:translate3d(0,101%,0);
   transition:transform .62s var(--ease-out); z-index:-1; }
 .cta span,.cta svg{ position:relative; z-index:1; }
-.cta:hover{ color:#05070a; border-color:var(--bone); }
+.cta:hover{ color:#05070a; border-color:var(--bone); text-shadow:none; }
 .cta:hover i{ transform:none; }
 .cta:hover svg path{ stroke:#05070a; }
 
@@ -559,7 +647,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
      16.11:1 to 16.08:1, all far past what either needs. It was darkening the
      approach, the gate and the lower steps to buy half a point of contrast
      nobody was short of. */
-body[data-layout-hero="b"] .hero-top{ margin-left:0; max-width:min(590px,46vw); }
+body[data-layout-hero="b"] .hero-top{ margin-left:0; max-width:min(720px,58vw); }
 body[data-layout-hero="b"] .hero-foot{ width:min(480px,40vw); margin-left:0; }
 body[data-layout-hero="b"] .hero-cue{ justify-content:flex-start; }
 body[data-layout-hero="b"] .chapters{ grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
@@ -811,7 +899,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 
   body[data-layout-closing="b"] .fin{ display:flex; align-items:stretch; text-align:left; gap:0; }
   body[data-layout-closing="b"] .fin .eyebrow{ margin:0 0 22px; }
-  body[data-layout-closing="b"] .fin h2{ writing-mode:horizontal-tb; font-size:clamp(30px,7.4vw,48px); }
+  body[data-layout-closing="b"] .fin h2{ writing-mode:horizontal-tb; font-size:clamp(30px,4.0vw,60px); }
   body[data-layout-closing="b"] .fin p{ margin:16px 0 0; }
   body[data-layout-closing="b"] .fin .cards{ grid-template-columns:1fr; grid-template-rows:auto; }
   body[data-layout-closing="b"] .fin .card:first-child{ grid-row:auto; }
@@ -901,12 +989,12 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     <span class="k"><b>01</b> — USP &amp; Our Solution</span><span class="rule"></span><span class="k">Sectors: Academic, Cultural, Corporate • Impact: High</span>
   </div>
   <div class="hero-top">
-    <h1 class="display h-hero">
+    <h1 class="display h-sec">
       <span class="mask-line"><span>Research visualised.</span></span>
       <span class="mask-line"><span>Science humanised.</span></span>
     </h1>
     <p class="hero-kicker body-lg" data-rv="up">Turning complex science into audiovisual stories that articulate impact, engage stakeholders, and secure funding.</p>
-    <p class="hero-sub body" data-rv="up">Policymakers and grant reviewers are often cognitively overloaded — but human stories cut through the noise. We act as your strategic partner, bridging the gap between high-value research and the non-scientific community by translating complex science into accessible, high-impact audiovisual narratives.</p>
+    <p class="hero-sub body-lg" data-rv="up">Policymakers and grant reviewers are often cognitively overloaded — but human stories cut through the noise. We act as your strategic partner, bridging the gap between high-value research and the non-scientific community by translating complex science into accessible, high-impact audiovisual narratives.</p>
     <div class="cta-stack" data-rv="fade">
       <a class="cta" href="#lessons" data-cursor>
         <i></i><span>View Portfolio</span>
@@ -1064,7 +1152,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   <div class="gate-grid">
     <div class="gate-main">
       <h2 class="display h-sec" data-rv="up">Case study: New perspectives on 21st century evolution.</h2>
-      <p class="lead" data-rv="up">A multi-format media production partnership. We conceptualised, scripted and produced accessible scicomm &amp; educational videos for public and undergraduate-level audiences, handling all editing, custom motion graphics, and sound design, alongside capturing and editing a full scientific conference and selected speaker interviews. Working closely together with high-profile Professor Denis Noble, we rigorously deconstructed 21st century evolutionary biology concepts and turned them into nuanced narratives for public and academic consumption, alongside managing a 3-camera hybrid event setup and full-scale post-production.</p>
+      <p class="lead body-lg" data-rv="up">A multi-format media production partnership. We conceptualised, scripted and produced accessible scicomm &amp; educational videos for public and undergraduate-level audiences, handling all editing, custom motion graphics, and sound design, alongside capturing and editing a full scientific conference and selected speaker interviews. Working closely together with high-profile Professor Denis Noble, we rigorously deconstructed 21st century evolutionary biology concepts and turned them into nuanced narratives for public and academic consumption, alongside managing a 3-camera hybrid event setup and full-scale post-production.</p>
     </div>
     <div class="gate-copy">
       <p class="case-fact" data-rv="up"><b>Client</b> Professor Emeritus Denis Noble &amp; Voices from Oxford, University of Oxford</p>
